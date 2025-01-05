@@ -156,7 +156,7 @@ public class Vertex
 
     public override string ToString()
     {
-        return $"{X:0.000000} {Y:0.000000} {Z:0.000000}";
+        return $"{X.AsString()} {Y.AsString()} {Z.AsString()}";
     }
 }
 
@@ -286,8 +286,8 @@ public class Color
             var b = Blue / 255.0;
             var a = Alpha / 255.0;
             if (Alpha != byte.MaxValue)
-                return $"{r:0.000} {g:0.000} {b:0.000} {a:0.000}";
-            return $"{r:0.000} {g:0.000} {b:0.000}";
+                return $"{r.AsString()} {g.AsString()} {b.AsString()} {a.AsString()}";
+            return $"{r.AsString()} {g.AsString()} {b.AsString()}";
         }
 
         if (Alpha != byte.MaxValue)
@@ -312,5 +312,10 @@ public static class ParseUtils
     public static string[] SplitSpace(this string s)
     {
         return s.Trim().Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+    }
+
+    public static string AsString(this double value)
+    {
+        return (Math.Sign(value) == -1 ? "" : " ") + value.ToString("0.000000", CultureInfo.InvariantCulture);
     }
 }

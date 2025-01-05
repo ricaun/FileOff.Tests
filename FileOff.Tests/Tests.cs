@@ -33,7 +33,7 @@ namespace FileOff.Tests
             string[] lines = File.ReadAllLines(path);
             var off = Off.Parse(lines);
             Console.WriteLine(off);
-            File.WriteAllText(file, off.ToString());
+            //File.WriteAllText(file, off.ToString());
         }
     }
 }
