@@ -115,41 +115,6 @@ public class Off
         return off;
     }
 
-
-    //public static Off ParseOff(string[] lines)
-    //{
-    //    var off = new Off();
-    //    int lineIndex = 0;
-    //    string header = lines[lineIndex++].Trim();
-
-    //    // Ensure it's an OFF file
-    //    if (header != "OFF")
-    //    {
-    //        throw new InvalidOperationException("This is not a valid OFF file.");
-    //    }
-
-    //    // Read the number of vertices and faces
-    //    var counts = lines[lineIndex++].SplitSpace();
-    //    int vertexCount = int.Parse(counts[0]);
-    //    int faceCount = int.Parse(counts[1]);
-    //    int edgesCount = int.Parse(counts[2]);
-
-    //    // Read vertices
-    //    for (int i = 0; i < vertexCount; i++)
-    //    {
-    //        var vertexData = lines[lineIndex++];
-    //        off.Vertices.Add(Vertex.Parse(vertexData));
-    //    }
-
-    //    // Read faces
-    //    for (int i = 0; i < faceCount; i++)
-    //    {
-    //        var faceData = lines[lineIndex++];
-    //        off.Faces.Add(Face.Parse(faceData));
-    //    }
-
-    //    return off;
-    //}
 }
 
 public class Vertex
