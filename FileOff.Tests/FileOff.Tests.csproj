@@ -33,6 +33,9 @@
     <None Update="Files\model.off">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Files\teapot.off">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Files\tref.off">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -201,7 +201,7 @@ public class Face
         var face = $"{VertexIndices.Count}  {string.Join(" ", VertexIndices)}";
         if (FaceColor is Color)
         {
-            face += $"  {FaceColor}";
+            face += $" {FaceColor}";
         }
         return $"{face}";
     }
@@ -209,31 +209,35 @@ public class Face
 
 public class Color
 {
-    public int Red { get; set; }
-    public int Green { get; set; }
-    public int Blue { get; set; }
-    public int Alpha { get; set; }
+    public double Red { get; set; }
+    public double Green { get; set; }
+    public double Blue { get; set; }
+    public double Alpha { get; set; }
 
     public static Color Default => new Color();
 
-    public Color(int red = 128, int green = 128, int blue = 128, int alpha = 255)
+
+    public Color(double red, double green, double blue, double alpha = 1.0)
     {
         Red = red;
         Green = green;
         Blue = blue;
         Alpha = alpha;
     }
-
-    public Color(double red, double green, double blue, double alpha = 1.0)
+    public Color(int red = 128, int green = 128, int blue = 128, int alpha = 255)
     {
-        Red = (int)(255 * red);
-        Green = (int)(255 * green);
-        Blue = (int)(255 * blue);
-        Alpha = (int)(255 * alpha);
-        DoubleRepresentation = true;
+        Red = (double) red / byte.MaxValue;
+        Green = (double) green / byte.MaxValue;
+        Blue = (double) blue / byte.MaxValue;
+        Alpha = (double) alpha / byte.MaxValue;
+        IntRepresentation = true;
     }
 
-    private bool DoubleRepresentation = false;
+    private bool IntRepresentation = false;
+    private byte GetRed() => (byte)(Red * byte.MaxValue);
+    private byte GetGreen() => (byte)(Green * byte.MaxValue);
+    private byte GetBlue() => (byte)(Blue * byte.MaxValue);
+    private byte GetAlpha() => (byte)(Alpha * byte.MaxValue);
 
     public static Color Parse(string colorParts)
     {
@@ -279,20 +283,22 @@ public class Color
 
     public override string ToString()
     {
-        if (DoubleRepresentation)
+        if (IntRepresentation)
         {
-            var r = Red / 255.0;
-            var g = Green / 255.0;
-            var b = Blue / 255.0;
-            var a = Alpha / 255.0;
-            if (Alpha != byte.MaxValue)
-                return $"{r.AsString()} {g.AsString()} {b.AsString()} {a.AsString()}";
-            return $"{r.AsString()} {g.AsString()} {b.AsString()}";
+            var r = GetRed();
+            var g = GetGreen();
+            var b = GetBlue();
+            var a = GetAlpha();
+
+            if (a != byte.MaxValue)
+                return $" {r} {g} {b} {a}";
+            return $" {r} {g} {b}";
         }
 
-        if (Alpha != byte.MaxValue)
-            return $"{Red} {Green} {Blue} {Alpha}";
-        return $"{Red} {Green} {Blue}";
+        if (Alpha != 1.0)
+            return $"{Red.AsString()}{Green.AsString()}{Blue.AsString()}{Alpha.AsString()}";
+        return $"{Red.AsString()}{Green.AsString()}{Blue.AsString()}";
+
     }
 }
 
