@@ -214,10 +214,7 @@ public class Color
     public double Blue { get; set; }
     public double Alpha { get; set; }
 
-    public static Color Default => new Color();
-
-
-    public Color(double red, double green, double blue, double alpha = 1.0)
+    public Color(double red, double green, double blue, double alpha = 1.0f)
     {
         Red = red;
         Green = green;

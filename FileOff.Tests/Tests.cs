@@ -8,12 +8,6 @@ namespace FileOff.Tests
 {
     public class Tests
     {
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
-
         public static string[] Files()
         {
             var location = Path.GetDirectoryName(typeof(Tests).Assembly.Location);
@@ -27,7 +21,7 @@ namespace FileOff.Tests
         }
 
         [TestCaseSource(nameof(Files))]
-        public void Test2(string file)
+        public void ParseFileTest(string file)
         {
             string path = GetFile(file);
             string[] lines = File.ReadAllLines(path);
